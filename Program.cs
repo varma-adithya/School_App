@@ -2,12 +2,27 @@
 using School_App.Functionalitites.Subjects;
 using School_App.Functionalitites.User;
 using System;
+using SQLitePCL;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using Microsoft.EntityFrameworkCore;
+using School_App.Models;
 
 class Program
 {
     static void Main(string[] args)
-    { 
-        using (var context = new SchoolDbContext())
+    {
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .Build();
+
+        var connectionString = configuration.GetConnectionString("SchoolAppConnection");
+        var options = new DbContextOptionsBuilder<SchoolDbContext>()
+            .UseSqlite(connectionString)
+            .Options;
+
+
+        using (var context = new SchoolDbContext(options))
         {
             while (true)
             {
@@ -24,17 +39,17 @@ class Program
                 switch (choice)
                 {
                     case 1:
-                        var Stud = new Studentfunc();
+                        var Stud = new Studentfunc(context);
                         Stud.ShowMenu();
                         break;
                     case 2:
                         break;
                     case 3:
-                        var Sub = new Subjectsfunc();
+                        var Sub = new Subjectsfunc(context);
                         Sub.ShowMenu();
                         break;
                     case 4:
-                        var User = new Userfunc();
+                        var User = new Userfunc(context);
                         User.ShowMenu();
                         return;
                     default:

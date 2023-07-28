@@ -1,38 +1,50 @@
-﻿using School_App.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
 
-public class SchoolDbContext : DbContext
+
+namespace School_App.Models
 {
-    public DbSet<Student> Students { get; set; }
-    public DbSet<StudentMarks> StudentMarks { get; set; }
-    public DbSet<Subjects> Subjects { get; set; }
-    public DbSet<User> User { get; set; }
-
-    public SchoolDbContext() : base("Data Source=SchoolApp.db")
+    public class SchoolDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-    }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<StudentMarks> StudentMarks { get; set; }
+        public DbSet<Subjects> Subjects { get; set; }
+        public DbSet<User> User { get; set; }
 
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
+        public SchoolDbContext(DbContextOptions<SchoolDbContext> options) : base(options)
+        {
+        }
 
-        modelBuilder.Entity<Student>()
-            .HasKey(s => s.StudentsId);
+        //public protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    string connectionString = "Data Source=D:/Projects/School App/School_App/database.db";
+        //    optionsBuilder.UseSqlite(connectionString);
+        //    optionsBuilder.LogTo(message => Console.WriteLine(message));
+        //}
 
-        modelBuilder.Entity<Subjects>()
-            .HasKey(s => s.SubjectsId);
 
-        modelBuilder.Entity<StudentMarks>()
-            .HasKey(sm => sm.MarksId);
 
-        modelBuilder.Entity<StudentMarks>()
-            .HasRequired(sm => sm.Student)
-            .WithMany()
-            .HasForeignKey(sm => sm.StudentId);
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
 
-        modelBuilder.Entity<StudentMarks>()
-            .HasRequired(sm => sm.Subjects)
-            .WithMany()
-            .HasForeignKey(sm => sm.SubjectsId);
+        //    modelBuilder.Entity<Student>()
+        //        .HasKey(s => s.StudentsId);
+
+        //    modelBuilder.Entity<Subjects>()
+        //        .HasKey(s => s.SubjectsId);
+
+        //    modelBuilder.Entity<StudentMarks>()
+        //        .HasKey(sm => sm.MarksId);
+
+        //    modelBuilder.Entity<StudentMarks>()
+        //        .HasRequired(sm => sm.Student)
+        //        .WithMany()
+        //        .HasForeignKey(sm => sm.StudentId);
+
+        //    modelBuilder.Entity<StudentMarks>()
+        //        .HasRequired(sm => sm.Subjects)
+        //        .WithMany()
+        //        .HasForeignKey(sm => sm.SubjectsId);
+        //}
     }
 }

@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using School_App.Models;
 
 namespace School_App.Functionalitites.Student
 {
     public class Studentfunc
     {
-        //private int GetMaxStudentId()
-        //{
-        //    using (var context = new SchoolDbContext())
-        //    {
-        //        int maxUserId = context.Students.Any() ? context.Students.Max(u => u.StudentsId) : 0;
-        //        return maxUserId;
-        //    }
-        //}
+        private readonly SchoolDbContext context;
+
+        public Studentfunc(SchoolDbContext context)
+        {
+            this.context = context;
+        }
+
         public void CreateStudent()
         {
-            using (var context = new SchoolDbContext())
+            int id = 0;
+            //using (var context = new SchoolDbContext(this.options))
             {
                 Console.Write("Enter student's Name: ");
                 string inName = Console.ReadLine();
@@ -34,13 +35,14 @@ namespace School_App.Functionalitites.Student
                 };
 
                 context.Students.Add(Student);
-
-                ReadStudent(Student.StudentsId);
-                Console.WriteLine("Please note Student ID!! It is required to search a student");
-
                 context.SaveChanges();
 
                 Console.WriteLine("Student added successfully!");
+
+
+
+                ReadStudent(Student.StudentsId);
+                Console.WriteLine("Please note Student ID!! It is required to search a student");
             }
         }
 
@@ -60,7 +62,7 @@ namespace School_App.Functionalitites.Student
 
         public void ReadStudent(int studentId)
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 var student = context.Students.Find(studentId);
                 if (student != null)
@@ -78,7 +80,7 @@ namespace School_App.Functionalitites.Student
 
         public void UpdateStudent()
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 Console.Write("Enter student's ID to update: ");
                 int studentId = int.Parse(Console.ReadLine());
@@ -106,7 +108,7 @@ namespace School_App.Functionalitites.Student
 
         public void DeleteStudent()
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 Console.Write("Enter student's ID to delete: ");
                 int studentId = int.Parse(Console.ReadLine());
@@ -128,7 +130,6 @@ namespace School_App.Functionalitites.Student
 
         public void ShowMenu()
         {
-            // Show a menu to the user
             while (true)
             {
                 Console.WriteLine("Select an option:");

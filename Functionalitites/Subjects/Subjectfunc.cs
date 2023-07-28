@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using School_App.Models;
 
 namespace School_App.Functionalitites.Subjects
@@ -10,17 +11,16 @@ namespace School_App.Functionalitites.Subjects
     public class Subjectsfunc
     {
 
-        //private int GetMaxSubjectId()
-        //{
-        //    using (var context = new SchoolDbContext())
-        //    {
-        //        int maxUserId = context.Subjects.Any() ? context.Subjects.Max(u => u.SubjectsId) : 0;
-        //        return maxUserId;
-        //    }
-        //}
+        private readonly SchoolDbContext context;
+
+        public Subjectsfunc(SchoolDbContext context)
+        {
+            this.context = context;
+        }
+
         public void CreateSubjects()
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 Console.Write("Enter Subjects Name: ");
                 string inName = Console.ReadLine();
@@ -62,7 +62,7 @@ namespace School_App.Functionalitites.Subjects
 
         public void ReadSubjects(int SubjectsId)
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 var Subjects = context.Subjects.Find(SubjectsId);
                 if (Subjects != null)
@@ -80,7 +80,7 @@ namespace School_App.Functionalitites.Subjects
 
         public void UpdateSubjects()
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 Console.Write("Enter Subjects ID to update: ");
                 int SubjectsId = int.Parse(Console.ReadLine());
@@ -108,7 +108,7 @@ namespace School_App.Functionalitites.Subjects
 
         public void DeleteSubjects()
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 Console.Write("Enter Subjects's ID to delete: ");
                 int SubjectsId = int.Parse(Console.ReadLine());

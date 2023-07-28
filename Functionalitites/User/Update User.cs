@@ -1,4 +1,5 @@
-﻿using System;
+﻿using School_App.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +9,17 @@ namespace School_App.Functionalitites.User
 {
     public class Userfunc
     {
-        //private int GetMaxUserId()
-        //{
-        //    using (var context = new SchoolDbContext())
-        //    {
-        //        int maxUserId = context.User.Any() ? context.User.Max(u => u.UserId) : 0;
-        //        return maxUserId;
-        //    }
-        //}
+
+        private readonly SchoolDbContext context;
+
+        public Userfunc(SchoolDbContext context)
+        {
+            this.context = context;
+        }
 
         public void CreateUser()
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 Console.Write("Enter User Name: ");
                 string inName = Console.ReadLine();
@@ -61,7 +61,7 @@ namespace School_App.Functionalitites.User
 
         public void ReadUser(int UserId)
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 var User = context.User.Find(UserId);
                 if (User != null)
@@ -79,7 +79,7 @@ namespace School_App.Functionalitites.User
 
         public void UpdateUser()
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 Console.Write("Enter User ID to update: ");
                 int UserId = int.Parse(Console.ReadLine());
@@ -107,7 +107,7 @@ namespace School_App.Functionalitites.User
 
         public void DeleteUser()
         {
-            using (var context = new SchoolDbContext())
+            //using (var context = new SchoolDbContext())
             {
                 Console.Write("Enter User ID to delete: ");
                 int UserId = int.Parse(Console.ReadLine());
@@ -129,7 +129,6 @@ namespace School_App.Functionalitites.User
 
         public void ShowMenu()
         {
-            // Show a menu to the user
             while (true)
             {
                 Console.WriteLine("Select an option:");
