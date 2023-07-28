@@ -14,7 +14,7 @@ class Program
 
         //var connectionString = configuration.GetConnectionString("SchoolAppConnection");
         var options = new DbContextOptionsBuilder<SchoolDbContext>()
-            .UseSqlite("Data Source=C:/Side/School_App/school_database.db")
+            .UseSqlite("Data Source=D:/Projects/School App/School_App/school_database.db")
             .Options;
 
 
