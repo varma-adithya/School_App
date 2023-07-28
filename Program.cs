@@ -1,10 +1,6 @@
 ﻿using School_App.Functionalitites.Student;
 using School_App.Functionalitites.Subjects;
 using School_App.Functionalitites.User;
-using System;
-using SQLitePCL;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 using Microsoft.EntityFrameworkCore;
 using School_App.Models;
 
@@ -12,13 +8,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .Build();
+        //var configuration = new ConfigurationBuilder()
+        //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        //    .Build();
 
-        var connectionString = configuration.GetConnectionString("SchoolAppConnection");
+        //var connectionString = configuration.GetConnectionString("SchoolAppConnection");
         var options = new DbContextOptionsBuilder<SchoolDbContext>()
-            .UseSqlite(connectionString)
+            .UseSqlite("Data Source=C:/Side/School_App/school_database.db")
             .Options;
 
 
