@@ -41,7 +41,7 @@ namespace School_App.Functionalitites.Student
 
 
 
-                ReadStudent(Student.StudentsId);
+                ReadStudent(Student.StudentId);
                 Console.WriteLine("Please note Student ID!! It is required to search a student");
             }
         }
@@ -67,7 +67,7 @@ namespace School_App.Functionalitites.Student
                 var student = context.Students.Find(studentId);
                 if (student != null)
                 {
-                    Console.WriteLine($"Student ID: {student.StudentsId}");
+                    Console.WriteLine($"Student ID: {student.StudentId}");
                     Console.WriteLine($"Name: {student.Name}");
                     Console.WriteLine($"Class: {student.Class}");
                 }

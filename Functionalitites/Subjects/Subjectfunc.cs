@@ -29,7 +29,7 @@ namespace School_App.Functionalitites.Subjects
                 string inDesc = Console.ReadLine();
 
 
-                var Subjects = new Models.Subjects
+                var Subjects = new Models.Subject
                 {
                     SubjectName = inName,
                     Description = inDesc

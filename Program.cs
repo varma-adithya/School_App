@@ -3,6 +3,7 @@ using School_App.Functionalitites.Subjects;
 using School_App.Functionalitites.User;
 using Microsoft.EntityFrameworkCore;
 using School_App.Models;
+using School_App.DriveUpload;
 
 class Program
 {
@@ -28,7 +29,8 @@ class Program
                 Console.WriteLine("2. Marks");
                 Console.WriteLine("3. Subject");
                 Console.WriteLine("4. Update User");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("5. Upload");
+                Console.WriteLine("6. Exit");
                 Console.Write("Enter your choice: ");
                 int choice = int.Parse(Console.ReadLine());
 
@@ -47,6 +49,10 @@ class Program
                     case 4:
                         var User = new Userfunc(context);
                         User.ShowMenu();
+                        return;
+                    case 5:
+                        var Upload = new DriveUpload();
+                        Upload.Upload();
                         return;
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");

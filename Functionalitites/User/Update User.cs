@@ -34,7 +34,7 @@ namespace School_App.Functionalitites.User
                     Password = inDesc
                 };
 
-                context.User.Add(User);
+                context.Users.Add(User);
 
                 ReadUser(User.UserId);
                 Console.WriteLine("Please note User ID!! It is required to search a User");
@@ -63,7 +63,7 @@ namespace School_App.Functionalitites.User
         {
             //using (var context = new SchoolDbContext())
             {
-                var User = context.User.Find(UserId);
+                var User = context.Users.Find(UserId);
                 if (User != null)
                 {
                     Console.WriteLine($"User ID: {User.UserId}");
@@ -84,7 +84,7 @@ namespace School_App.Functionalitites.User
                 Console.Write("Enter User ID to update: ");
                 int UserId = int.Parse(Console.ReadLine());
 
-                var User = context.User.Find(UserId);
+                var User = context.Users.Find(UserId);
                 if (User != null)
                 {
                     Console.Write("Enter updated User Name: ");
@@ -112,10 +112,10 @@ namespace School_App.Functionalitites.User
                 Console.Write("Enter User ID to delete: ");
                 int UserId = int.Parse(Console.ReadLine());
 
-                var User = context.User.Find(UserId);
+                var User = context.Users.Find(UserId);
                 if (User != null)
                 {
-                    context.User.Remove(User);
+                    context.Users.Remove(User);
                     context.SaveChanges();
 
                     Console.WriteLine("User deleted successfully!");
