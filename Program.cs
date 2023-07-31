@@ -9,11 +9,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        //var configuration = new ConfigurationBuilder()
-        //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-        //    .Build();
-
-        //var connectionString = configuration.GetConnectionString("SchoolAppConnection");
         var options = new DbContextOptionsBuilder<SchoolDbContext>()
             .UseSqlite("Data Source=C:/Side/School_App/school_database.db")
             .Options;
