@@ -14,10 +14,10 @@ namespace School_App.Services
             this.context = context;
         }
 
-        public void CreateStudent(Student student)
+        public int CreateStudent(Student student)
         {
             context.Students.Add(student);
-            context.SaveChanges();
+            return context.SaveChanges();
         }
 
         public List<Student> AllStudents()
@@ -26,30 +26,32 @@ namespace School_App.Services
         }
 
 
-        public Student ReadStudent(int studentId)
+        public Student FindStudent(int studentId)
         {
             return context.Students.Find(studentId);
         }
 
-        public void UpdateStudent(Student updatedStudent)
+        public int UpdateStudent(Student updatedStudent)
         {
             var existingStudent = context.Students.Find(updatedStudent.StudentId);
             if (existingStudent != null)
             {
                 existingStudent.Name = updatedStudent.Name;
                 existingStudent.Class = updatedStudent.Class;
-                context.SaveChanges();
+                return context.SaveChanges();
             }
+            else return 0;
         }
 
-        public void DeleteStudent(int studentId)
+        public int DeleteStudent(int studentId)
         {
             var student = context.Students.Find(studentId);
             if (student != null)
             {
                 context.Students.Remove(student);
-                context.SaveChanges();
+                return context.SaveChanges(); 
             }
+            else return 0;
         }
 
 
