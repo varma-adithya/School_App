@@ -5,7 +5,7 @@
 namespace School_App.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,32 +14,32 @@ namespace School_App.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    StudentsId = table.Column<int>(type: "INTEGER", nullable: false)
+                    StudentId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Class = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.StudentsId);
+                    table.PrimaryKey("PK_Students", x => x.StudentId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Subjects",
                 columns: table => new
                 {
-                    SubjectsId = table.Column<int>(type: "INTEGER", nullable: false)
+                    SubjectId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     SubjectName = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Subjects", x => x.SubjectsId);
+                    table.PrimaryKey("PK_Subjects", x => x.SubjectId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -49,55 +49,55 @@ namespace School_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentMarks",
+                name: "StudentGrades",
                 columns: table => new
                 {
-                    MarksId = table.Column<int>(type: "INTEGER", nullable: false)
+                    StudentGradeId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     StudentId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SubjectsId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SubjectId = table.Column<int>(type: "INTEGER", nullable: false),
                     Marks = table.Column<float>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentMarks", x => x.MarksId);
+                    table.PrimaryKey("PK_StudentGrades", x => x.StudentGradeId);
                     table.ForeignKey(
-                        name: "FK_StudentMarks_Students_StudentId",
+                        name: "FK_StudentGrades_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
-                        principalColumn: "StudentsId",
+                        principalColumn: "StudentId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentMarks_Subjects_SubjectsId",
-                        column: x => x.SubjectsId,
+                        name: "FK_StudentGrades_Subjects_SubjectId",
+                        column: x => x.SubjectId,
                         principalTable: "Subjects",
-                        principalColumn: "SubjectsId",
+                        principalColumn: "SubjectId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentMarks_StudentId",
-                table: "StudentMarks",
+                name: "IX_StudentGrades_StudentId",
+                table: "StudentGrades",
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentMarks_SubjectsId",
-                table: "StudentMarks",
-                column: "SubjectsId");
+                name: "IX_StudentGrades_SubjectId",
+                table: "StudentGrades",
+                column: "SubjectId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "StudentMarks");
+                name: "StudentGrades");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Students");

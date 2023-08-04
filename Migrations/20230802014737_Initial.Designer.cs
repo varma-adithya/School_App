@@ -10,8 +10,8 @@ using School_App.Models;
 namespace School_App.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20230725134630_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230802014737_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace School_App.Migrations
 
             modelBuilder.Entity("School_App.Models.Student", b =>
                 {
-                    b.Property<int>("StudentsId")
+                    b.Property<int>("StudentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -33,14 +33,14 @@ namespace School_App.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("StudentsId");
+                    b.HasKey("StudentId");
 
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("School_App.Models.StudentMarks", b =>
+            modelBuilder.Entity("School_App.Models.StudentGrade", b =>
                 {
-                    b.Property<int>("MarksId")
+                    b.Property<int>("StudentGradeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -50,21 +50,21 @@ namespace School_App.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SubjectsId")
+                    b.Property<int>("SubjectId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("MarksId");
+                    b.HasKey("StudentGradeId");
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("SubjectsId");
+                    b.HasIndex("SubjectId");
 
-                    b.ToTable("StudentMarks");
+                    b.ToTable("StudentGrades");
                 });
 
-            modelBuilder.Entity("School_App.Models.Subjects", b =>
+            modelBuilder.Entity("School_App.Models.Subject", b =>
                 {
-                    b.Property<int>("SubjectsId")
+                    b.Property<int>("SubjectId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -75,7 +75,7 @@ namespace School_App.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("SubjectsId");
+                    b.HasKey("SubjectId");
 
                     b.ToTable("Subjects");
                 });
@@ -96,10 +96,10 @@ namespace School_App.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("School_App.Models.StudentMarks", b =>
+            modelBuilder.Entity("School_App.Models.StudentGrade", b =>
                 {
                     b.HasOne("School_App.Models.Student", "Student")
                         .WithMany()
@@ -107,15 +107,15 @@ namespace School_App.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("School_App.Models.Subjects", "Subjects")
+                    b.HasOne("School_App.Models.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectsId")
+                        .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Student");
 
-                    b.Navigation("Subjects");
+                    b.Navigation("Subject");
                 });
 #pragma warning restore 612, 618
         }
