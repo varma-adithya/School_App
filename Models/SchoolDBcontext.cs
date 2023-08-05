@@ -8,7 +8,7 @@ namespace School_App.Models
 		private readonly string _connectionString = "Data Source=C:/Side/School_App/school_database.db";
 
 		public DbSet<Student> Students { get; set; }
-        public DbSet<StudentGrade> StudentGrades { get; set; }
+        public DbSet<StudentAssessment> StudentGrades { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
 
