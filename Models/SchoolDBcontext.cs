@@ -13,6 +13,8 @@ namespace School_App.Models
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 		public DbSet<ClassSubject> ClassSubjects { get; set; }
+		public DbSet<ClassStudent> ClassStudents { get; set; }
+		public DbSet<AcademicYear> AcademicYears { get; set; }
 		public DbSet<Class> Classes { get; set; }
 
 
