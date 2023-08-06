@@ -2,8 +2,10 @@
 {
 	public class Subject
     {
-        public int SubjectId { get; set; }
-        public string SubjectName { get; set; }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
         public string? Description { get; set; }
     }
 }
