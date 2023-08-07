@@ -1,6 +1,6 @@
 ﻿namespace School_App.Models
 {
-	public class AcademicYear
+	public class AcademicYear : BaseEntity
 	{
         public int Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace School_App.Models
 {
-	public class Class
+	public class Class : BaseEntity
     {
         public int Id { get; set; }
         
