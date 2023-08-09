@@ -1,6 +1,6 @@
 ﻿namespace School_App.Models
 {
-    public class StudentDetail
+    public class StudentDetail : IId
     {
         public int Id { get; set; }
 
