@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using School_App.Models;
 using School_App.DriveUpload;
+using School_App.Repository;
 
 class Program
 {

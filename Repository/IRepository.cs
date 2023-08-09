@@ -1,9 +1,8 @@
 ﻿using School_App.Models;
-using System.Linq.Expressions;
 
 namespace School_App.Repository
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> where T :  class, IId
     {
         IEnumerable<T> GetAll();
         T GetById(int id);

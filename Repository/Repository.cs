@@ -2,7 +2,7 @@
 
 namespace School_App.Repository
 {
-	public class Repository<Class_Type> : IRepository<Class_Type> where Class_Type : BaseEntity
+	public class Repository<T> : IRepository<T> where T : class, IId
 	{
 		private readonly SchoolDbContext context;
 
@@ -11,46 +11,45 @@ namespace School_App.Repository
 			context = Context;
         }
 
-
-		public void Add(Class_Type entity)
+		public void Add(T entity)
 		{
-			context.Set<Class_Type>().Add(entity);
+			context.Set<T>().Add(entity);
 			context.SaveChanges();
 		}
 
-		public IEnumerable<Class_Type> GetAll()
+		public IEnumerable<T> GetAll()
 		{
-			return context.Set<Class_Type>().ToList();
+			return context.Set<T>().ToList();
 		}
 
-        public Class_Type GetById(int id)
+        public T GetById(int id)
         {
-			return context.Set<Class_Type>().Find(id);
+			return context.Set<T>().Find(id);
 		}
 
-		public void Update(Class_Type entity)
+		public void Update(T entity)
 		{
 			var existing = GetById(entity.Id);
 			if (existing == null)
 			{
-				throw new Exception($"{nameof(Class_Type)} entry not found");
+				throw new Exception($"{nameof(T)} entry not found");
 			}
 			else {
-				context.Set<Class_Type>().Update(entity);
+				context.Set<T>().Update(entity);
 				context.SaveChanges();
 			}
 		}
 
 		public void Delete(int id)
 		{
-			var existing = context.Set<Class_Type>().Find(id)
+			var existing = context.Set<T>().Find(id)
 ;
 			if (existing == null)
 			{
-				throw new Exception($"{nameof(Class_Type)} entry not found");
+				throw new Exception($"{nameof(T)} entry not found");
 			}
 
-			context.Set<Class_Type>().Remove(existing);
+			context.Set<T>().Remove(existing);
 			context.SaveChanges();
 		}
 

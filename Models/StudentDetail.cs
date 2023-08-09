@@ -1,6 +1,6 @@
 ﻿namespace School_App.Models
 {
-    public class StudentDetail : BaseEntity
+    public class StudentDetail : IId
     {
         public int Id { get; set; }
 
