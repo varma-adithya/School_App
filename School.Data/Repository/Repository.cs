@@ -1,15 +1,15 @@
-﻿using School_App.Models;
+﻿using School.Data.Models;
 
-namespace School_App.Repository
+namespace School.Data.Repository
 {
 	public class Repository<T> : IRepository<T> where T : class, IId
 	{
 		private readonly SchoolDbContext context;
 
 		public Repository(SchoolDbContext Context)
-        {
+		{
 			context = Context;
-        }
+		}
 
 		public void Add(T entity)
 		{
@@ -22,8 +22,8 @@ namespace School_App.Repository
 			return context.Set<T>().ToList();
 		}
 
-        public T GetById(int id)
-        {
+		public T GetById(int id)
+		{
 			return context.Set<T>().Find(id);
 		}
 
@@ -34,7 +34,8 @@ namespace School_App.Repository
 			{
 				throw new Exception($"{nameof(T)} entry not found");
 			}
-			else {
+			else
+			{
 				context.Set<T>().Update(entity);
 				context.SaveChanges();
 			}
@@ -54,5 +55,5 @@ namespace School_App.Repository
 		}
 
 
-    }
+	}
 }
