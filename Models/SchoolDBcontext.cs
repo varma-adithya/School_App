@@ -3,19 +3,28 @@
 
 namespace School_App.Models
 {
-    public class SchoolDbContext : DbContext
+	public class SchoolDbContext : DbContext
     {
-        public DbSet<Student> Students { get; set; }
-        public DbSet<StudentGrade> StudentMarks { get; set; }
+		private readonly string _connectionString = "Data Source=C:/Side/School_App/school_database.db";
+
+		public DbSet<StudentDetail> Students { get; set; }
+		public DbSet<Assessment> Assessments { get; set; }
+		public DbSet<StudentAssessment> StudentAssessments { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<User> Users { get; set; }
-
-        public SchoolDbContext(DbContextOptions<SchoolDbContext> options) : base(options)
-        {
-        }
-
-
+        public DbSet<Teacher> Teachers { get; set; }
+		public DbSet<ClassSubject> ClassSubjects { get; set; }
+		public DbSet<ClassStudent> ClassStudents { get; set; }
+		public DbSet<AcademicYear> AcademicYears { get; set; }
+		public DbSet<Class> Classes { get; set; }
 
 
-    }
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			if (!optionsBuilder.IsConfigured)
+			{
+				optionsBuilder.UseSqlite(_connectionString);
+			}
+		}
+	}
 }

@@ -10,7 +10,7 @@ namespace School_App.Models
             var optionsBuilder = new DbContextOptionsBuilder<SchoolDbContext>();
             optionsBuilder.UseSqlite("Data Source=school_database.db");
 
-            return new SchoolDbContext(optionsBuilder.Options);
+            return new SchoolDbContext();
         }
     }
 }
