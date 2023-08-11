@@ -10,4 +10,8 @@
 	<ItemGroup>
 		<PackageReference Include="Google.Apis.Drive.v3" Version="1.61.0.3120" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\School.Business\School.Business.csproj" />
+	</ItemGroup>
 </Project>
