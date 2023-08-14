@@ -9,9 +9,9 @@ namespace School.Business
 
         private readonly IRepository<AcademicYear> _repository;
 
-        public AcademicYearService()
+        public AcademicYearService(IRepository<AcademicYear> repository)
         {
-            _repository = new Repository<AcademicYear>(new SchoolDbContext());
+            _repository = repository;
         }
 
         public void AddAcademicYear(AcademicYear academicYear) 
