@@ -17,6 +17,9 @@ namespace School.Business
         public void AddAcademicYear(AcademicYear academicYear) 
             => _repository.Add(academicYear);
 
+        public IEnumerable<AcademicYear> GetAllAcademicYear()
+            => _repository.GetAll().ToList();
+
         public void UpdateAcademicYear(AcademicYear academicYear)
             => _repository.Update(academicYear);
 

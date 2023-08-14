@@ -85,17 +85,62 @@ public class Program
         Console.WriteLine("Enter start year in the Format yyyy");
         int.TryParse(Console.ReadLine(), out int startYear);
         var acService = new AcademicYearService(new Repository<AcademicYear>(new SchoolDbContext()));
-        acService.AddAcademicYear(new AcademicYear { StartYear = startYear, EndYear = startYear + 1 });
+        var academicYear = new AcademicYear { StartYear = startYear, EndYear = startYear + 1 };
+        acService.AddAcademicYear(academicYear);
+        ShowAcademicYearDetails(academicYear.Id);
+
     }
+
+    static void ShowAcademicYearDetails(int academicYearId)
+    {
+        var acService = new AcademicYearService(new Repository<AcademicYear>(new SchoolDbContext()));
+        var academicYear = acService.GetAcademicYear(academicYearId);
+
+        if (academicYear != null)
+        {
+            Console.WriteLine($"Academic Year Id: {academicYear.Id}");
+            Console.WriteLine($"Start Date: {academicYear.StartYear}");
+            Console.WriteLine($"End Date: {academicYear.EndYear}");
+        }
+        else
+        {
+            Console.WriteLine("Academic Year not found.");
+        }
+    }
+
 
     static void UpdateAcademicYear()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Enter Academic Year ID:");
+        int.TryParse(Console.ReadLine(), out int academicYrId);
+        var acService = new AcademicYearService(new Repository<AcademicYear>(new SchoolDbContext()));
+        var academicYear = acService.GetAcademicYear(academicYrId);
+
+        if (academicYear != null)
+        {
+            Console.WriteLine("Enter new start year in the Format yyyy");
+            int.TryParse(Console.ReadLine(), out int newAcademicyr);
+            academicYear.StartYear = newAcademicyr;
+            academicYear.EndYear = newAcademicyr + 1;
+            acService.UpdateAcademicYear(academicYear);
+        }
+        else
+        {
+            Console.WriteLine("Academic Year not found.");
+        }
+
+
     }
 
     static void ShowAllAcademicYears()
     {
-        throw new NotImplementedException();
+        var acService = new AcademicYearService(new Repository<AcademicYear>(new SchoolDbContext()));
+        foreach (var year in acService.GetAllAcademicYear())
+        {
+            Console.WriteLine($"Academic Year Id: {year.Id}");
+            Console.WriteLine($"Start Date: {year.StartYear}");
+            Console.WriteLine($"End Date: {year.EndYear}");
+        }
     }
 
     
