@@ -4,7 +4,9 @@ namespace School.Data.Models
 {
 	public class SchoolDbContext : DbContext
 	{
-		private readonly string _connectionString = "Data Source=C:/Side/School_App/school_database.db";
+		private readonly string _connectionString = "Data Source=D:/Projects/School App/school_database.db";
+
+
 
 		public DbSet<StudentDetail> Students { get; set; }
 		public DbSet<Assessment> Assessments { get; set; }
