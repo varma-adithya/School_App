@@ -1,0 +1,53 @@
+Business Requirements
+1. Add Academic Year
+2. Add Teachers information
+3. Add Student Information
+4. Add Subjects
+5. Add Class Information
+6. Map student and teachers and subjects to classes
+7. Add Assessment to classes
+8. Add score to students assessment
+
+
+Reports
+Select Academic Year
+Select Standard
+
+All Divisions
+	View Overrall Performance
+	Division Assessment Name Pass Percentage
+	Overrall Pass perecentage
+	Top 3 students
+	Top 3 students by subject
+	
+By Division
+	View Overrall Performance
+	Assessment Name Pass Percentage
+	Overrall Pass perecentage
+	Top 3 students
+	Top 3 students by subject
+	
+Non Functional Requirements
+Should be able to operate from any desktop, as command line or desktop application
+	Database should be stored on google drive
+	While app startup check for an existing database if found & newer then download it and use it, delete the existing copy
+
+There should two modes of users
+	School admin Mode
+		1. Add Academic Year
+		2. Add Teachers information
+		3. Add Student Information
+		4. Add Subjects
+		5. Add Class Information
+		6. Map student and teachers and subjects to classes
+		
+		View complete report
+	Teacher Mode
+		7. Add Assessment to classes
+		8. Add score to students assessment
+		
+		View classes report
+		View Subjects report
+		
+		
+	
