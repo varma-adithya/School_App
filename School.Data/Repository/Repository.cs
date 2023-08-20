@@ -1,4 +1,7 @@
-﻿using School.Data.Models;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using School.Data.Exceptions;
+using School.Data.Models;
 
 namespace School.Data.Repository
 {
@@ -13,8 +16,20 @@ namespace School.Data.Repository
 
 		public void Add(T entity)
 		{
-			context.Set<T>().Add(entity);
-			context.SaveChanges();
+            try
+            {
+                context.Set<T>().Add(entity);
+                context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (IsUniqueConstraintViolation(ex))
+                {
+					throw new DataLayerException(ErrorMessages.UniqueConstraint, ex);
+                }
+                
+                throw;
+            }
 		}
 
 		public IEnumerable<T> GetAll()
@@ -32,12 +47,24 @@ namespace School.Data.Repository
 			var existing = GetById(entity.Id);
 			if (existing == null)
 			{
-				throw new Exception($"{nameof(T)} entry not found");
+				throw new DataLayerException($"{nameof(T)} entry not found");
 			}
 			else
 			{
-				context.Set<T>().Update(entity);
-				context.SaveChanges();
+                try
+                {
+                    context.Set<T>().Update(entity);
+                    context.SaveChanges();
+                }
+                catch (DbUpdateException ex)
+                {
+                    if (IsUniqueConstraintViolation(ex))
+                    {
+                        throw new DataLayerException(ErrorMessages.UniqueConstraint, ex);
+                    }
+
+                    throw;
+                }
 			}
 		}
 
@@ -47,13 +74,23 @@ namespace School.Data.Repository
 ;
 			if (existing == null)
 			{
-				throw new Exception($"{nameof(T)} entry not found");
+				throw new DataLayerException($"{nameof(T)} entry not found");
 			}
 
 			context.Set<T>().Remove(existing);
 			context.SaveChanges();
 		}
 
-
-	}
+        private bool IsUniqueConstraintViolation(DbUpdateException ex)
+        {
+            foreach (var entry in ex.Entries)
+            {
+                if (ex.InnerException is SqliteException sqliteException && sqliteException.SqliteErrorCode == 19)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }

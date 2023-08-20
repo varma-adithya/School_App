@@ -4,9 +4,12 @@ namespace School.Data.Models
 {
 	public class SchoolDbContext : DbContext
 	{
-		private readonly string _connectionString = "Data Source=D:/Projects/School App/school_database.db";
+		private readonly string _connectionString;
 
-
+		public SchoolDbContext(string connectionString)
+		{
+			_connectionString = connectionString;
+		}
 
 		public DbSet<StudentDetail> Students { get; set; }
 		public DbSet<Assessment> Assessments { get; set; }
@@ -27,5 +30,12 @@ namespace School.Data.Models
 				optionsBuilder.UseSqlite(_connectionString);
 			}
 		}
-	}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<AcademicYear>().HasIndex(x => x.StartYear).IsUnique();
+        }
+    }
 }

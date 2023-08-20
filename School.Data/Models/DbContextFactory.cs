@@ -7,10 +7,7 @@ namespace School.Data.Models
 	{
 		public SchoolDbContext CreateDbContext(string[] args)
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<SchoolDbContext>();
-			optionsBuilder.UseSqlite("Data Source=school_database.db");
-
-			return new SchoolDbContext();
+			return new SchoolDbContext("Data Source=school_database.db");
 		}
 	}
 }

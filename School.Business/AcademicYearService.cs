@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using School.Data.Models;
+﻿using School.Data.Models;
 using School.Data.Repository;
 
 namespace School.Business
@@ -9,9 +8,9 @@ namespace School.Business
 
         private readonly IRepository<AcademicYear> _repository;
 
-        public AcademicYearService(IRepository<AcademicYear> repository)
+        public AcademicYearService()
         {
-            _repository = repository;
+            _repository = new Repository<AcademicYear>(new SchoolDbContext(@"Data Source=C:/Users/abhilashgr/Documents/GitHub/School_App/School.Data/school_database.db"));
         }
 
         public void AddAcademicYear(AcademicYear academicYear) 
