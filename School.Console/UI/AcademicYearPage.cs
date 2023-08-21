@@ -1,13 +1,11 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using School.Business;
+﻿using School.Business;
 using School.Data.Models;
 
 namespace School.ConsoleApp.UI
 {
-    public static class AcademicYearPage
+	public static class AcademicYearPage
     {
-        private static  AcademicYearService acService = new AcademicYearService();
+        private static IAcademicYearService acService = new AcademicYearService();
         
         public static void SubMenu()
         {
@@ -60,8 +58,6 @@ namespace School.ConsoleApp.UI
                 AddAcademicYear();
         }
 
-        
-
         public static void UpdateAcademicYear()
         {
             Console.WriteLine("Enter Academic Year ID:");
@@ -112,6 +108,5 @@ namespace School.ConsoleApp.UI
                 Console.WriteLine($"End Date: {year.EndYear}");
             }
         }
-
     }
 }

@@ -3,8 +3,20 @@ using School.Data.Repository;
 
 namespace School.Business
 {
-    public class AcademicYearService
+    public interface IAcademicYearService
     {
+        void AddAcademicYear(AcademicYear academicYear);
+
+        IEnumerable<AcademicYear> GetAllAcademicYear();
+
+        void UpdateAcademicYear(AcademicYear academicYear);
+
+        public AcademicYear GetAcademicYear(int id);
+	}
+
+
+	public class AcademicYearService : IAcademicYearService
+	{
 
         private readonly IRepository<AcademicYear> _repository;
 
