@@ -7,19 +7,19 @@ namespace School.Data.Repository
 {
 	public class Repository<T> : IRepository<T> where T : class, IId
 	{
-		private readonly SchoolDbContext context;
+		private readonly SchoolDbContext _context;
 
-		public Repository(SchoolDbContext Context)
+		public Repository(SchoolDbContext context)
 		{
-			context = Context;
+			_context = context;
 		}
 
 		public void Add(T entity)
 		{
             try
             {
-                context.Set<T>().Add(entity);
-                context.SaveChanges();
+                _context.Set<T>().Add(entity);
+                _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
@@ -34,12 +34,12 @@ namespace School.Data.Repository
 
 		public IEnumerable<T> GetAll()
 		{
-			return context.Set<T>().ToList();
+			return _context.Set<T>().ToList();
 		}
 
 		public T GetById(int id)
 		{
-			return context.Set<T>().Find(id);
+			return _context.Set<T>().Find(id);
 		}
 
 		public void Update(T entity)
@@ -53,8 +53,8 @@ namespace School.Data.Repository
 			{
                 try
                 {
-                    context.Set<T>().Update(entity);
-                    context.SaveChanges();
+                    _context.Set<T>().Update(entity);
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateException ex)
                 {
@@ -70,15 +70,15 @@ namespace School.Data.Repository
 
 		public void Delete(int id)
 		{
-			var existing = context.Set<T>().Find(id)
+			var existing = _context.Set<T>().Find(id)
 ;
 			if (existing == null)
 			{
 				throw new DataLayerException($"{nameof(T)} entry not found");
 			}
 
-			context.Set<T>().Remove(existing);
-			context.SaveChanges();
+			_context.Set<T>().Remove(existing);
+			_context.SaveChanges();
 		}
 
         private bool IsUniqueConstraintViolation(DbUpdateException ex)
