@@ -20,9 +20,9 @@ namespace School.Business
 
         private readonly IRepository<AcademicYear> _repository;
 
-        public AcademicYearService()
+        public AcademicYearService(IRepository<AcademicYear> repository)
         {
-            _repository = new Repository<AcademicYear>(new SchoolDbContext(@"Data Source=C:/Users/abhilashgr/Documents/GitHub/School_App/School.Data/school_database.db"));
+           _repository = repository;
         }
 
         public void AddAcademicYear(AcademicYear academicYear) 

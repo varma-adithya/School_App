@@ -3,11 +3,16 @@ using School.Data.Models;
 
 namespace School.ConsoleApp.UI
 {
-	public static class AcademicYearPage
-    {
-        private static IAcademicYearService acService = new AcademicYearService();
+	public class AcademicYearPage : IAcademicYearPage
+	{
+        private IAcademicYearService _acService;
         
-        public static void SubMenu()
+        public AcademicYearPage( IAcademicYearService acService )
+        {
+            _acService = acService;
+        }
+
+		public void SubMenu()
         {
             while (true)
             {
@@ -41,7 +46,7 @@ namespace School.ConsoleApp.UI
             }
         }
 
-        public static void AddAcademicYear()
+        public void AddAcademicYear()
         {
             Console.Clear();
             Console.WriteLine("Enter start year in the Format yyyy");
@@ -49,7 +54,7 @@ namespace School.ConsoleApp.UI
             if (int.TryParse(Console.ReadLine(), out int startYear))
             {
                 var academicYear = new AcademicYear { StartYear = startYear, EndYear = startYear + 1 };
-                acService.AddAcademicYear(academicYear);
+                _acService.AddAcademicYear(academicYear);
 
                 Console.WriteLine("Academic year added successfully");
                 return;
@@ -58,12 +63,11 @@ namespace School.ConsoleApp.UI
                 AddAcademicYear();
         }
 
-        public static void UpdateAcademicYear()
+        public void UpdateAcademicYear()
         {
             Console.WriteLine("Enter Academic Year ID:");
             int.TryParse(Console.ReadLine(), out int academicYrId);
-            var acService = new AcademicYearService();
-            var academicYear = acService.GetAcademicYear(academicYrId);
+            var academicYear = _acService.GetAcademicYear(academicYrId);
 
             if (academicYear != null)
             {
@@ -71,7 +75,7 @@ namespace School.ConsoleApp.UI
                 int.TryParse(Console.ReadLine(), out int newAcademicyr);
                 academicYear.StartYear = newAcademicyr;
                 academicYear.EndYear = newAcademicyr + 1;
-                acService.UpdateAcademicYear(academicYear);
+                _acService.UpdateAcademicYear(academicYear);
             }
             else
             {
@@ -81,10 +85,9 @@ namespace School.ConsoleApp.UI
 
         }
 
-        public static void ShowAcademicYearDetails(int academicYearId)
+        public void ShowAcademicYearDetails(int academicYearId)
         {
-            var acService = new AcademicYearService();
-            var academicYear = acService.GetAcademicYear(academicYearId);
+            var academicYear = _acService.GetAcademicYear(academicYearId);
 
             if (academicYear != null)
             {
@@ -98,10 +101,9 @@ namespace School.ConsoleApp.UI
             }
         }
 
-        public static void ShowAllAcademicYears()
+        public void ShowAllAcademicYears()
         {
-            var acService = new AcademicYearService();
-            foreach (var year in acService.GetAllAcademicYear())
+            foreach (var year in _acService.GetAllAcademicYear())
             {
                 Console.WriteLine($"Academic Year Id: {year.Id}");
                 Console.WriteLine($"Start Date: {year.StartYear}");

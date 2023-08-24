@@ -1,12 +1,20 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using School.Business;
 using School.ConsoleApp.UI;
+using School.Data.Models;
+using School.Data.Repository;
 
 public class Program
 {
+    static IServiceProvider serviceProvider;
 
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
+		await RegisterDependencies(args);
+
         var keepLooping = true;
         while (keepLooping)
         {
@@ -27,7 +35,8 @@ public class Program
                 switch (choice)
                 {
                     case 1:
-                        AcademicYearPage.SubMenu();
+                        var academicYearPage = serviceProvider.GetService<AcademicYearPage>();
+                        academicYearPage!.SubMenu();
                         break;
                     case 2:
                         break;
@@ -52,5 +61,21 @@ public class Program
             }
         }
     }
+
+	private static async Task RegisterDependencies(string[] args)
+	{
+		HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+        builder.Services.AddTransient<IAcademicYearPage, AcademicYearPage>();
+		builder.Services.AddTransient<IAcademicYearService, AcademicYearService>();
+		builder.Services.AddTransient<IRepository<AcademicYear>, Repository<AcademicYear>>();
+        builder.Services.AddDbContext<SchoolDbContext>();
+
+		using IHost host = builder.Build();
+
+        serviceProvider = host.Services;
+		//_repository = new Repository<AcademicYear>(new SchoolDbContext(@"Data Source=C:/Users/abhilashgr/Documents/GitHub/School_App/School.Data/school_database.db"));
+		
+        //await host.RunAsync();
+	}
 }
 
