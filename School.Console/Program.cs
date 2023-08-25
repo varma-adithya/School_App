@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using School.Business;
 using School.ConsoleApp.UI;
 using School.Data.Models;
@@ -9,25 +9,30 @@ using School.Data.Repository;
 
 public class Program
 {
-    static async Task Main(string[] args)
+    static void Main(string[] args)
     {
-		await RegisterDependenciesAndStartApp(args);
+		RegisterDependenciesAndStartApp(args);
     }
 
-	private static async Task RegisterDependenciesAndStartApp(string[] args)
+	private static void RegisterDependenciesAndStartApp(string[] args)
 	{
-		HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
-        builder.Services.AddTransient<IAcademicYearPage, AcademicYearPage>();
-		builder.Services.AddTransient<IAcademicYearService, AcademicYearService>();
-		builder.Services.AddTransient<IRepository<AcademicYear>, Repository<AcademicYear>>();
-        builder.Services.AddDbContext<SchoolDbContext>();
+
+        //setup our DI
+        var serviceProvider = new ServiceCollection()
+            .AddLogging()
+            .AddTransient<IAcademicYearPage, AcademicYearPage>()
+            .AddTransient<IAcademicYearService, AcademicYearService>()
+            .AddTransient<IRepository<AcademicYear>, Repository<AcademicYear>>()
+            .AddDbContext<SchoolDbContext>(options =>
+			{
+				options.UseSqlite("Data Source=school_database.db");
+			})
+            .BuildServiceProvider();
+
 		//_repository = new Repository<AcademicYear>(new SchoolDbContext(@"Data Source=C:/Users/abhilashgr/Documents/GitHub/School_App/School.Data/school_database.db"));
 
-		using IHost host = builder.Build();
 	
-		StartSchoolApp(host.Services);
-
-        await host.RunAsync();
+		StartSchoolApp(serviceProvider);
 	}
 
 	private static void StartSchoolApp(IServiceProvider serviceProvider)
