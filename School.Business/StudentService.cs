@@ -3,7 +3,18 @@ using School.Data.Repository;
 
 namespace School.Business
 {
-    public class StudentService
+    public interface IStudentService
+    {
+        void AddStudent(StudentDetail student);
+
+        IEnumerable<StudentDetail> GetAllStudents();
+
+        void UpdateStudent(StudentDetail student);
+
+        public StudentDetail GetStudentdetails(int id);
+    }
+
+    public class StudentService : IStudentService
     {
         private readonly IRepository<StudentDetail> _repository;
 
@@ -15,10 +26,13 @@ namespace School.Business
         public void AddStudent(StudentDetail student)
             => _repository.Add(student);
 
-        public void UpdateClass(StudentDetail student)
+        public void UpdateStudent(StudentDetail student)
             => _repository.Update(student);
 
-        public StudentDetail GetStudent(int id)
+        public StudentDetail GetStudentdetails(int id)
             => _repository.GetById(id);
+
+        IEnumerable<StudentDetail> IStudentService.GetAllStudents()
+            => _repository.GetAll().ToList();
     }
 }

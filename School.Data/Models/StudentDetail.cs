@@ -14,7 +14,7 @@
 
 		public string Address { get; set; }
 
-		public int ContactNumber { get; set; }
+		public long ContactNumber { get; set; }
 
 		public StudentStatus Status { get; set; }
 	}

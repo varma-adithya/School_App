@@ -57,6 +57,8 @@ namespace School.ConsoleApp.UI
                 _acService.AddAcademicYear(academicYear);
 
                 Console.WriteLine("Academic year added successfully");
+                Console.WriteLine("Enter any key to go back");
+                Console.ReadKey();
                 return;
             }
             else
@@ -76,6 +78,10 @@ namespace School.ConsoleApp.UI
                 academicYear.StartYear = newAcademicyr;
                 academicYear.EndYear = newAcademicyr + 1;
                 _acService.UpdateAcademicYear(academicYear);
+                Console.WriteLine("Academic year updated successfully");
+                Console.WriteLine("Enter any key to go back");
+                Console.ReadKey();
+                return;
             }
             else
             {
@@ -94,6 +100,9 @@ namespace School.ConsoleApp.UI
                 Console.WriteLine($"Academic Year Id: {academicYear.Id}");
                 Console.WriteLine($"Start Date: {academicYear.StartYear}");
                 Console.WriteLine($"End Date: {academicYear.EndYear}");
+                Console.WriteLine("Enter any key to go back");
+                Console.ReadKey();
+                return;
             }
             else
             {
@@ -109,6 +118,10 @@ namespace School.ConsoleApp.UI
                 Console.WriteLine($"Start Date: {year.StartYear}");
                 Console.WriteLine($"End Date: {year.EndYear}");
             }
+            Console.WriteLine("Enter any key to go back");
+            Console.ReadKey();
+            return;
+
         }
     }
 }

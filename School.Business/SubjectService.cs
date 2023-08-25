@@ -3,7 +3,14 @@ using School.Data.Repository;
 
 namespace School.Business
 {
-    public class SubjectService
+    public interface ISubjectService
+    {
+        public void AddSubject(Subject subject);
+        public void UpdateSubject(Subject subject);
+        public Subject GetSubject(int id);
+        public IEnumerable<Subject> GetAllSubjects();
+    }
+    public class SubjectService:ISubjectService
     {
         private readonly IRepository<Subject> _repository;
 
@@ -20,5 +27,8 @@ namespace School.Business
 
         public Subject GetSubject(int id)
             => _repository.GetById(id);
+
+        IEnumerable<Subject> ISubjectService.GetAllSubjects()
+        =>_repository.GetAll().ToList();
     }
 }

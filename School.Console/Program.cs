@@ -23,6 +23,9 @@ public class Program
             .AddTransient<IAcademicYearPage, AcademicYearPage>()
             .AddTransient<IAcademicYearService, AcademicYearService>()
             .AddTransient<IRepository<AcademicYear>, Repository<AcademicYear>>()
+			.AddTransient<IStudentPage, StudentPage>()
+			.AddTransient<IStudentService, StudentService>()
+			.AddTransient<IRepository<StudentDetail>, Repository<StudentDetail>>()
             .AddDbContext<SchoolDbContext>(options =>
 			{
 				options.UseSqlite("Data Source=school_database.db");
@@ -61,6 +64,8 @@ public class Program
 						academicYearPage!.SubMenu();
 						break;
 					case 2:
+						var studentPage = serviceProvider.GetService<IStudentPage>();
+						studentPage!.SubMenu();
 						break;
 					case 3:
 						break;

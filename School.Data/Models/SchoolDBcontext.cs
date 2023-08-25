@@ -23,6 +23,8 @@ namespace School.Data.Models
             base.OnModelCreating(modelBuilder);
 
 			modelBuilder.Entity<AcademicYear>().HasIndex(x => x.StartYear).IsUnique();
-        }
-    }
+			modelBuilder.Entity<StudentDetail>().HasIndex(x => x.RegistrationId).IsUnique();
+
+		}
+	}
 }

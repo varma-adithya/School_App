@@ -3,7 +3,14 @@ using School.Data.Repository;
 
 namespace School.Business
 {
-    public class TeacherService
+    public interface ITeacherService
+    {
+        public void AddTeacher(Teacher teacher);
+        public void UpdateTeacher(Teacher teacher);
+        public Teacher GetTeacher(int id);
+        public IEnumerable<Teacher> GetAllTeachers();
+    }
+    public class TeacherService: ITeacherService
     {
         private readonly IRepository<Teacher> _repository;
 
@@ -15,10 +22,13 @@ namespace School.Business
         public void AddTeacher(Teacher teacher)
             => _repository.Add(teacher);
 
-        public void UpdatTeacher(Teacher teacher)
+        public void UpdateTeacher(Teacher teacher)
             => _repository.Update(teacher);
 
         public Teacher GetTeacher(int id)
             => _repository.GetById(id);
+
+        IEnumerable<Teacher> ITeacherService.GetAllTeachers()
+        => _repository.GetAll().ToList();
     }
 }
