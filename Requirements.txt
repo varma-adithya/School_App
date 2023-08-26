@@ -1,10 +1,10 @@
 Business Requirements
-1. Add Academic Year
-2. Add Teachers information
-3. Add Student Information
-4. Add Subjects
-5. Add Class Information
-6. Map student and teachers and subjects to classes
+1. Manage Academic Year
+2. Manage Teachers information
+3. Manage Student Information
+4. Manage Subjects
+5. Manage Class Information
+6. Map student and teachers and subjects to classes - View a class details
 7. Add Assessment to classes
 8. Add score to students assessment
 

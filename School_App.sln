@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.ConsoleApp", "School
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DF773DCF-38AD-43A1-B7E6-5FD2A9629435}"
 	ProjectSection(SolutionItems) = preProject
-		School.Business\Requirements.txt = School.Business\Requirements.txt
+		Requirements.txt = Requirements.txt
 	EndProjectSection
 EndProject
 Global

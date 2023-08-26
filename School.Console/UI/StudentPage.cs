@@ -56,7 +56,7 @@ namespace School.ConsoleApp.UI
             if (DateTime.TryParse(Console.ReadLine(), out DateTime dateOfBirth))
             {
                 Console.WriteLine("Enter Student Gender (Male/Female)(Case-Sensitive!):");
-                if (Enum.TryParse<Gender>(Console.ReadLine(), out Gender sgender))
+                if (Enum.TryParse(Console.ReadLine(), out Gender sgender))
                 {
                     Console.WriteLine("Enter Student Address:");
                     string address = Console.ReadLine();
@@ -93,7 +93,6 @@ namespace School.ConsoleApp.UI
             Console.ReadKey();
         }
 
-
         public void ShowStudentDetails(int studentid)
         {
             var student = _studentservice.GetStudentdetails(studentid);
@@ -123,7 +122,6 @@ namespace School.ConsoleApp.UI
             Console.ReadKey();
             return;
         }
-
 
         public void UpdateStudent()
         {
