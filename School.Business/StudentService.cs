@@ -31,7 +31,6 @@ namespace School.Business
 
         public StudentDetail GetStudentdetails(int id)
             => _repository.GetById(id);
-
         IEnumerable<StudentDetail> IStudentService.GetAllStudents()
             => _repository.GetAll().ToList();
     }
