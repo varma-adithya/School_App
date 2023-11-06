@@ -1,11 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using School.Business;
 using School.ConsoleApp.UI;
 using School.Data.Models;
 using School.Data.Repository;
+using Spectre.Console;
 
 public class Program
 {
@@ -31,9 +30,6 @@ public class Program
 				options.UseSqlite("Data Source=school_database.db");
 			})
             .BuildServiceProvider();
-
-		//_repository = new Repository<AcademicYear>(new SchoolDbContext(@"Data Source=C:/Users/abhilashgr/Documents/GitHub/School_App/School.Data/school_database.db"));
-
 	
 		StartSchoolApp(serviceProvider);
 	}
@@ -43,50 +39,43 @@ public class Program
 		var keepLooping = true;
 		while (keepLooping)
 		{
+			Console.Clear();
+			var selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
+				.Title("Main Menu")
+				.PageSize(10)
+				.AddChoices("Manage Academic Year","Manage Students","Manage Subjects","Manage Teachers","Manage Classes","Exit"));
 			try
 			{
-				Console.Clear();
-				Console.WriteLine("Main Menu:");
-				Console.WriteLine("1. Manage Academic Year");
-				Console.WriteLine("2. Manage Students");
-				Console.WriteLine("3. Manage Subjects");
-				Console.WriteLine("4. Manage Teachers");
-				Console.WriteLine("5. Manage Classes");
-				Console.WriteLine("6. Exit");
-				Console.Write("Enter your choice: ");
-
-				int.TryParse(Console.ReadLine(), out int choice);
-
-				switch (choice)
+				switch (selection)
 				{
-					case 1:
+					case "Manage Academic Year":
 						var academicYearPage = serviceProvider.GetService<IAcademicYearPage>();
 						academicYearPage!.SubMenu();
 						break;
-					case 2:
+					case "Manage Students":
 						var studentPage = serviceProvider.GetService<IStudentPage>();
 						studentPage!.SubMenu();
 						break;
-					case 3:
+					case "Manage Subjects":
 						break;
-					case 4:
+					case "Manage Teachers":
 						break;
-					case 5:
+					case "Manage Classes":
 						break;
-					case 6:
+					case "Exit":
 						return;
 					default:
 						Console.WriteLine("Invalid choice. Please try again.");
 						break;
 				}
-			}
-			catch (Exception ex)
-			{
-				// Global exception handler
-				Console.WriteLine(ex);
-				keepLooping = false;
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                // Global exception handler
+                Console.WriteLine(ex);
+                keepLooping = false;
+            }
+        }
 	}
 }
 

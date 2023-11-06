@@ -1,10 +1,5 @@
 ﻿using School.Business;
 using School.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.ConsoleApp.UI
 {
@@ -134,6 +129,11 @@ namespace School.ConsoleApp.UI
                 }
             }
             else UpdateSubject();
+        }
+
+        public void DisplayStudent(StudentDetail student)
+        {
+            throw new NotImplementedException();
         }
     }
 }

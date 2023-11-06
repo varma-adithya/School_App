@@ -1,5 +1,6 @@
 ﻿using School.Business;
 using School.Data.Models;
+using Spectre.Console;
 
 namespace School.ConsoleApp.UI
 {
@@ -16,28 +17,28 @@ namespace School.ConsoleApp.UI
         {
             while (true)
             {
+
                 Console.Clear();
-                Console.WriteLine("Academic Year Menu:");
-                Console.WriteLine("1. Add Academic Year");
-                Console.WriteLine("2. Show All Academic Years");
-                Console.WriteLine("3. Update Academic Year");
-                Console.WriteLine("4. Back to Main Menu");
-                Console.Write("Enter your choice: ");
+                var selection = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                    .Title("Main Menu")
+                    .PageSize(10)
+                    .AddChoices("Add Academic Year", "Show All Academic Years", "Update Academic Year", "Manage Teachers", "Back to Main Menu"));
 
-                int.TryParse(Console.ReadLine(), out int choice);
 
-                switch (choice)
+                switch (selection)
                 {
-                    case 1:
+                    case "Add Academic Year":
                         AddAcademicYear();
                         break;
-                    case 2:
+                    case "Show All Academic Years":
                         ShowAllAcademicYears();
                         break;
-                    case 3:
+                    case "Update Academic Year":
                         UpdateAcademicYear();
                         break;
-                    case 4:
+                    case "Manage Teachers":
+                        return;
+                    case "Back to Main Menu":
                         return;
                     default:
                         Console.WriteLine("Invalid choice. Please try again.");
